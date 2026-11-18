@@ -1,0 +1,11 @@
+groups:
+  - name: host-availability
+    rules:
+      - alert: NodeExporterDown
+        expr: up{job="node-exporter"} == 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Node Exporter target is unavailable"
+          description: "Prometheus has not been able to scrape Node Exporter for more than two minutes."
